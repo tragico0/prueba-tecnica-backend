@@ -5,7 +5,8 @@ export enum TableName {
     BONUS = 'bonus',
     EMPLOYEES = 'employees',
     PAYROLL_COVER = 'payroll_cover',
-    PAYROLL_ROW = 'payroll_row'
+    PAYROLL_ROW = 'payroll_row',
+    ROLES = 'roles'
 }
 
 export default databaseConnection;

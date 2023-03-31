@@ -5,12 +5,20 @@ import { TimestampedTable } from '../database/utils';
 export const shorthands: ColumnDefinitions | undefined = undefined;
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
+    pgm.createTable(TableName.ROLES, TimestampedTable(pgm, {
+        code: {type: 'varchar'}
+    }));
+
     pgm.createTable(TableName.EMPLOYEES, TimestampedTable(pgm, {
         reference: { type: 'varchar' },
         first_name: { type: 'varchar' },
         first_last_name: { type: 'varchar' },
         hourly_rate: { type: 'float' },
-        role_code: { type: 'varchar' }
+        role_id: {
+            type: 'int',
+            references: TableName.ROLES,
+            referencesConstraintName: 'fkey_employee_role_id'
+        }
     }));
 
     pgm.createTable(TableName.BONUS, TimestampedTable(pgm, {
@@ -19,7 +27,13 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
         periodicy: { type: 'varchar' },
         percentage: { type: 'float' },
         amount: { type: 'float' },
-        disabled: { type: 'boolean' }
+        disabled: { type: 'boolean' },
+        role_id: {
+            type: 'int',
+            references: TableName.ROLES,
+            referencesConstraintName: 'fkey_bonus_role_id',
+            notNull: false
+        }
     }));
 
     pgm.createTable(TableName.TAXES, TimestampedTable(pgm, {
@@ -41,30 +55,12 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
         deliveries_count: { type: 'int' },
         payment_date: { type: 'timestamptz' }
     }));
-
-    pgm.createTable(TableName.PAYROLL_ROW, TimestampedTable(pgm, {
-        payroll_id: {
-            type: 'int',
-            references: TableName.PAYROLL_COVER,
-            referencesConstraintName: 'fkey_payroll_row_payroll_id'
-        },
-        bonus_id: {
-            type: 'int',
-            references: TableName.BONUS,
-            referencesConstraintName: 'fkey_payroll_row_bonus_id'
-        },
-        tax_id: {
-            type: 'int',
-            references: TableName.TAXES,
-            referencesConstraintName: 'fkey_payroll_row_tax_id'
-        },
-    }));
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
-    pgm.dropTable(TableName.PAYROLL_ROW);
     pgm.dropTable(TableName.PAYROLL_COVER);
     pgm.dropTable(TableName.TAXES);
     pgm.dropTable(TableName.BONUS);
     pgm.dropTable(TableName.EMPLOYEES);
+    pgm.dropTable(TableName.ROLES);
 }
