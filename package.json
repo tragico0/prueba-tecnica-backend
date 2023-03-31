@@ -7,12 +7,18 @@
     "serve": "DEBUG=server:* ts-node-dev --respawn --rs ./bin/www"
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
     "express": "~4.16.1",
+    "fast-case": "^1.7.0",
     "http-status-codes": "^2.2.0",
+    "lodash": "^4.17.21",
+    "moment-timezone": "^0.5.42",
     "morgan": "~1.9.1",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.10.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.2"
   },
@@ -20,7 +26,11 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
+    "@types/lodash": "^4.14.192",
+    "@types/moment": "^2.13.0",
     "@types/morgan": "^1.9.4",
-    "@types/node": "^18.15.11"
+    "@types/node": "^18.15.11",
+    "@types/node-pg-migrate": "^2.3.1",
+    "@types/pg": "^8.6.6"
   }
 }
