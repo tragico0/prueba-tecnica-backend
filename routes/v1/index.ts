@@ -1,5 +1,6 @@
 import { Router } from "express";
 import employeesRoutes from './employees';
+import rolesRoutes from './roles';
 
 const router = Router();
 
@@ -8,6 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.use('/employees', employeesRoutes);
+router.use('/roles', rolesRoutes);
 
 
 export default router;
