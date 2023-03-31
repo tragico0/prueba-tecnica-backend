@@ -4,7 +4,7 @@ CREATE FUNCTION create_employee (
     first_name varchar,
     first_last_name varchar,
     hourly_rate float,
-    role_code varchar
+    role_id int
 )
 RETURNS employees
 LANGUAGE plpgsql
@@ -15,9 +15,9 @@ DECLARE
 BEGIN
 
     INSERT INTO employees
-    (reference, first_name, first_last_name, hourly_rate, role_code)
+    (reference, first_name, first_last_name, hourly_rate, role_id)
     VALUES
-    (reference, first_name, first_last_name, hourly_rate, role_code)
+    (reference, first_name, first_last_name, hourly_rate, role_id)
     RETURNING *
     INTO employee;
   
