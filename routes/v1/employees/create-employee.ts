@@ -1,17 +1,16 @@
-import { plainToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { isEmpty } from "lodash";
 import db from '../../../database';
 import { toEntity } from "../../../database/utils";
-import { Employee, RoleCode } from "../../../models/employee";
+import { Employee } from "../../../models/employee";
 
 interface CreateEmployeeData {
     reference: string;
     firstName: string;
     firstLastName: string;
     hourlyRate: number;
-    roleCode: RoleCode;
+    roleId: number;
 }
 
 export default async (req: Request, res: Response) => {
@@ -28,6 +27,7 @@ export default async (req: Request, res: Response) => {
             data: toEntity(Employee, employee)
         });
     } catch (error) {
+        console.error(error);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             message: ReasonPhrases.INTERNAL_SERVER_ERROR
         });
@@ -40,9 +40,9 @@ async function createEmployee (data: CreateEmployeeData) {
     `, [
         data.reference,
         data.firstName,
-        data.firstLastName,
-        data.hourlyRate,
-        data.roleCode
+        data.firstLastName ?? '',
+        data.hourlyRate ?? 30,
+        data.roleId
     ]);
 
     return toEntity(Employee, result);
