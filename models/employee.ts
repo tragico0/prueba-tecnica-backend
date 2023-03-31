@@ -7,5 +7,9 @@ export enum RoleCode {
 }
 
 export class Employee extends BaseModel {
+    reference: string;
+    firstName: string;
+    firstLastName: string;
     hourlyRate: number;
+    roleId: number;
 }

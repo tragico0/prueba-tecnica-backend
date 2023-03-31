@@ -2,7 +2,7 @@
 import { forEach, keyBy, map, reduce } from 'lodash';
 import { MigrationBuilder, ColumnDefinitions } from 'node-pg-migrate';
 import { TableName } from '../database';
-import { BonusPeriodicy } from '../models/bonuses';
+import { BonusPeriodicy } from '../models/bonus';
 import { RoleCode } from '../models/employee';
 
 export const shorthands: ColumnDefinitions | undefined = undefined;
