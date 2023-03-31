@@ -2,12 +2,16 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import cors from 'cors';
 
 var indexRouter = require('./routes/index');
 
 var app = express();
 
 app.use(logger('dev'));
+app.use(cors({
+    origin: [/.*\.coppel\.test.*/]
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
