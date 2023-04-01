@@ -170,7 +170,7 @@ function calculateTaxesPayment (grossSalary: number, allTaxes: Tax[]) {
 function calculateNetTotal (salaryBreakdown: any) {
     let total = 0;
 
-    total += salaryBreakdown.grossSalary;
+    total += salaryBreakdown.baseSalary;
     total += salaryBreakdown.deliveriesPayment;
     total += salaryBreakdown.bonusesPayment;
     total -= salaryBreakdown.taxesPayment;
