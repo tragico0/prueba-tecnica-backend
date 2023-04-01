@@ -7,7 +7,10 @@
     "serve": "DEBUG=server:* ts-node-dev --respawn --rs ./bin/www",
     "pg-migrate": "ts-node node_modules/.bin/node-pg-migrate -j ts",
     "migrate": "yarn pg-migrate up",
-    "migrate:undo": "yarn pg-migrate down"
+    "migrate:undo": "yarn pg-migrate down",
+    "database:replace:functions": "node ./bin/exec-sql replace-functions",
+    "database:create": "node ./bin/exec-sql create-database",
+    "database:drop": "node ./bin/exec-sql drop-database"
   },
   "dependencies": {
     "@types/bluebird": "^3.5.38",
