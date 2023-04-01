@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { isFinite, toNumber } from "lodash";
-import db from "../../../database";
+import db, { TableName } from "../../../database";
 
 export default async (req: Request, res: Response) => {
     const id = toNumber(req.params?.id);
@@ -27,11 +27,19 @@ export default async (req: Request, res: Response) => {
 
 async function deleteEmployeeById (id: number) {
     await db.query(`
-        DELETE FROM employees
+        UPDATE ${TableName.PAYROLL_COVER} SET
+            updated_at = CURRENT_TIMESTAMP,
+            deleted_at = CURRENT_TIMESTAMP
+        WHERE employee_id = $1
+    `, [id]);
+
+
+    await db.query(`
+        UPDATE ${TableName.EMPLOYEES} SET
+            updated_at = CURRENT_TIMESTAMP,
+            deleted_at = CURRENT_TIMESTAMP
         WHERE id = $1
-    `, [
-        id
-    ]);
+    `, [id]);
 
     return true;
 }
