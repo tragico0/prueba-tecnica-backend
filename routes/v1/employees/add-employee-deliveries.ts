@@ -46,10 +46,10 @@ export default async (req: Request, res: Response) => {
         const [payrollCover] = await findOrCreatePayrollCover(employee, targetMonth, deliveriesQuantity);
         const updatedPayrollCover = await addDeliveriesToPayrollCover(
             payrollCover.id,
-            payrollCover.deliveriesCount + deliveriesQuantity
+            deliveriesQuantity
         );
 
-        return res.status(200).json({
+        return res.status(200).json({     
             data: plainToClassFromExist(payrollCover, updatedPayrollCover)
         });
 
@@ -102,7 +102,7 @@ async function findOrCreatePayrollCover (
 async function addDeliveriesToPayrollCover (payrollCoverId: number, quantity: number): Promise<Partial<PayrollCover>> {
     const { rows: [result] } = await db.query(`
         UPDATE ${TableName.PAYROLL_COVER}
-        SET deliveries_count = $1
+        SET deliveries_count = deliveries_count + $1
         WHERE id = $2
         RETURNING deliveries_count
     `, [
