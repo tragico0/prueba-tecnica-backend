@@ -1,4 +1,5 @@
 import { BaseModel } from "./base-model";
+import { Role } from "./role";
 
 export enum RoleCode {
     DRIVER = 'DRIVER',
@@ -12,4 +13,6 @@ export class Employee extends BaseModel {
     firstLastName: string;
     hourlyRate: number;
     roleId: number;
+
+    role?: Role;
 }
