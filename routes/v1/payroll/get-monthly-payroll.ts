@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { filter, find, forEach, groupBy, isNil, isNull, keyBy, map, reduce } from 'lodash';
+import { find, forEach, isNil, map } from 'lodash';
+import moment from 'moment-timezone';
+import Config from '../../../config';
 import db, { TableName } from '../../../database';
 import { toEntity } from '../../../database/utils';
 import { Bonus, BonusCode, BonusPeriodicy } from '../../../models/bonus';
 import { Employee } from '../../../models/employee';
 import { PayrollCover } from '../../../models/payroll-cover';
-import { Role } from '../../../models/role';
-import moment from 'moment-timezone';
-import Config from '../../../config';
 import { Tax, TaxCode } from '../../../models/tax';
 
 export default async (req: Request, res: Response) => {
