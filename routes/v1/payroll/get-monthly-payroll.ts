@@ -111,6 +111,7 @@ async function getPayrollCovers () {
         INNER JOIN employees e ON e.id = pc.employee_id AND e.deleted_at IS NULL
         WHERE pc.deleted_at IS NULL
             AND pc.created_at BETWEEN $1 AND $2
+        ORDER BY e.reference ASC
     `, [
         startOfMonth.toISOString(), endOfMonth.toISOString()
     ]);
