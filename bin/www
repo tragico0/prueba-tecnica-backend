@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var appPath = process.env.NODE_ENV = 'production' ? '../build/app' : '../app';
+var app = require(appPath);
 var debug = require('debug')('server:server');
 var http = require('http');
 

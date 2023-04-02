@@ -12,6 +12,6 @@ router.get('/', function(req: Request, res: Response, next: NextFunction) {
   res.render('index', { title: 'Express' });
 });
 
-router.use('/api/v1', v1Routes);
+router.use('/v1', v1Routes);
 
 module.exports = router;

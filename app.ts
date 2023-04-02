@@ -10,7 +10,7 @@ var app = express();
 
 app.use(logger('dev'));
 app.use(cors({
-    origin: [/.*\.coppel\.test.*/]
+    origin: [/.*\.coppel\.test.*/, /.*\.rinku\.test.*/]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
